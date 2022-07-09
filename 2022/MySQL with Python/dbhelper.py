@@ -26,7 +26,7 @@ class DBconnector:
             return 1
             # return f"{self.mycursor.rowcount} record inserted successfully"
 
-    def search(self, email:str, password:str):
+    def search(self, email: str, password: str):
         try:
             myquery = """ SELECT * FROM users WHERE email = (%s) and password = (%s) """
             val = (email, password)
@@ -41,6 +41,83 @@ class DBconnector:
         try:
             myquery = """ DELETE FROM users WHERE id = (%s) """
             val = (userId,)
+            self.mycursor.execute(myquery, val)
+            self.conn.commit()
+        except:
+            return -1
+        else:
+            return 1
+
+    def updateAll(self, userId: int, uname: str, uemail: str, upass: str):
+        try:
+            myquery = """ UPDATE users SET name = %s, email = %s, password = %s WHERE id = %s """
+            val = (uname, uemail, upass, userId)
+            self.mycursor.execute(myquery, val)
+            self.conn.commit()
+        except:
+            return -1
+        else:
+            return 1
+
+    def update_name_email(self, userId: int, uname: str, uemail: str):
+        try:
+            myquery = """ UPDATE users SET name = %s, email = %s WHERE id = %s """
+            val = (uname, uemail, userId)
+            self.mycursor.execute(myquery, val)
+            self.conn.commit()
+        except:
+            return -1
+        else:
+            return 1
+
+    def update_name_pass(self, userId: int, uname: str, upass: str):
+        try:
+            myquery = """ UPDATE users SET name = %s, password = %s WHERE id = %s """
+            val = (uname, upass, userId)
+            self.mycursor.execute(myquery, val)
+            self.conn.commit()
+        except:
+            return -1
+        else:
+            return 1
+
+    def update_email_pass(self, userId: int, uemail: str, upass: str):
+        try:
+            myquery = """ UPDATE users SET email = %s, password = %s WHERE id = %s """
+            val = (uemail, upass, userId)
+            self.mycursor.execute(myquery, val)
+            self.conn.commit()
+        except:
+            return -1
+        else:
+            return 1
+
+    def update_name(self, userId: int, uname: str):
+        try:
+            myquery = """ UPDATE users SET name = %s WHERE id = %s """
+            val = (uname, userId)
+            self.mycursor.execute(myquery, val)
+            self.conn.commit()
+        except:
+            return -1
+        else:
+            return 1
+
+    def update_email(self, userId: int, uemail: str):
+        try:
+            myquery = """ UPDATE users SET email = %s WHERE id = %s """
+            val = (uemail, userId)
+            self.mycursor.execute(myquery, val)
+            self.conn.commit()
+        except:
+            return -1
+        else:
+            return 1
+
+    def update_pass(self, userId: int, upass: str):
+        try:
+            myquery = """ UPDATE users SET password = %s WHERE id = %s """
+            val = (upass, userId)
             self.mycursor.execute(myquery, val)
             self.conn.commit()
         except:
