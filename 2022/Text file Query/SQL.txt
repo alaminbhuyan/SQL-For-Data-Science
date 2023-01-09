@@ -1,0 +1,238 @@
+
+1) to show all list of database: show databases;
+
+2) to create new database: create database database_name;
+
+3) to delete database: drop database database_name;
+
+4) to rename table_name: rename table old_name to new_name;
+
+5) to see all details of the table: describe table_name;
+
+6) to delete all record: TRUNCATE TABLE table_name;
+
+7) to use specific databases: USE database_name;
+
+8) to comment specific line: -- comment line
+
+data type:
+	smallint
+	int
+	bigint
+	float
+	double
+	decimal
+	char(size)
+	varchar(size)
+	text
+	year
+	date
+	time
+
+creating table:
+	create table table_name(
+	col_name1 data_type(size),
+	col_name2 data_type(size),
+	col_name3 data_type(size),
+	primary key(roll)
+	);
+
+creating table:
+	CREATE TABLE IF NOT EXISTS table_name(
+	col_name1 data_type(size),
+	col_name2 data_type(size),
+	col_name3 data_type(size),
+	primary key(roll)
+	);
+
+insert_data:
+	insert into table_name(id, name, gender, age, gpa, city)
+	values
+	(101,"rahim","male",18,3.33,"Comilla"),
+	(101,"rahim","male",18,3.33,"Comilla"),
+	(101,"rahim","male",18,3.33,"Comilla");
+
+select_data: (to show all columns: select *)
+	select column_list
+	from table_name;
+
+
+sql constraints:
+	not null,unique,primary key= not null+unique,check,default,auto_increment
+	ex:
+	create table teacher(
+	id int not null auto_increment,
+	name varchar(20) not null,
+	salary double(10,3),
+	primary key(id)
+	);
+
+drop duplicate_value:
+	select distinct column_name
+	from table_name;
+
+limit key use to see how many data we want to see:
+	select *
+	from table_name
+	limit num(4) or limit num(3,4) that means 3 ar por theke 4 ta row show korbe
+
+order by: (for sort value)
+	SELECT col_Name FROM `student_details` ORDER BY Name;
+	SELECT Name FROM `student_details` ORDER BY Name desc;(for desending)
+
+operator:
+	select 5+5;
+
+find data using where:
+	select column_name
+	where condition;(Gender="female")
+	ex:
+	SELECT Roll,Name,Gpa
+	FROM student_details
+	WHERE Roll BETWEEN 102 AND 105;
+
+update_statement:
+	update table_name
+	set col_name = value1,col_name=value2.....
+	where condition;
+
+delete_statement:
+	delete from table_name
+	where condition; ex: (id=1002)
+
+delete_all_rows:
+	delete from table_name;
+
+upper_function:
+	select upper(col_name)
+	from table_name;
+	
+	or, select upper(col_name) as any_col_name that we want to give
+	from table_name;
+
+concat_function:
+	select concat()
+	from table_name;
+
+greatest_function:
+	select greatest()
+
+least_function:
+	select least()
+
+
+truncate_function:
+	select truncate()
+
+rand_function:
+	select rand()
+
+exp_function:
+	select exp()
+
+
+some_other_fun: max(),min(),count(),sum(),avg()
+
+sub_query:
+	select *
+	from table_name
+	where salary>(select avg(salary) from table_name);
+
+alter_command:(for table add,delete,rename)
+	add:
+	alter table table_name
+	add column_name data_type(size);
+	
+	ex:
+	alter table student_details
+	add phone text(20);
+
+	rename:
+	alter table table_name
+	change old_column_name new_col_name data_type(size);
+	
+	ex:
+	alter table student_details
+	change phone Phone_num int(14);
+
+	delete:
+	alter table table_name
+	drop column column_name;
+	
+	ex:
+	alter table student_details
+	drop column phone;
+
+like_statement:
+	select *
+	from customers
+	where last_name like "b%"  (% means anay characther and the word start with b)
+	where last_name like "b__"  (_ means one characther and the word start with b)
+	we can also use 'not like'
+
+
+regexp_statement:
+	select *
+	from customers
+	where last_name regexp "field"  ;
+
+
+
+is null or is not null_statement:
+	select *
+	from customers
+	where phone is null or is not null ;	
+
+
+in_statement:
+	select *
+	from table_name
+	where column IN (list)
+
+	ex:
+	select *
+	from customers
+	where city IN ('dhaka','comilla','sylet')
+
+index_create:
+	create index index_name(your choice you can give any name)
+	ON table_name(column_name)
+
+	ex:
+	create index city_index
+	ON student_details(city);
+
+index_drop:
+	drop index index_name
+	ON table_name;
+
+	ex:
+	drop index city_index
+	ON student_details;
+
+make_foreign_key: (assume that we have customers and product table)
+	create table orders(
+	id int not null auto_increment,
+	orderNumber varchar(255),
+	product_ID int,
+	customer_ID int,
+	orderDate Datetime default Current_timestamp,
+	primary key(id),
+	Foreign key(product_ID) references product(id),
+	Foreign key(customer_ID) references customer(id)
+	);
+
+Inner_join:
+	select customers.first_name, customers.last_name, orders.order_num
+	from customers
+	inner join orders
+	ON customers.id = orders.customers_id
+	order by customers.last_name;
+
+
+Extract Month:
+	MONTHNAME(column_name)
+	ex: select * monthname(date) from orders;
+	
+
+
