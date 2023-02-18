@@ -1,9 +1,9 @@
 
 1) to show all list of database: show databases;
 
-2) to create new database: create database database_name;
+2) to create new database: create database database_name; or create database if not exists database_name;
 
-3) to delete database: drop database database_name;
+3) to delete database: drop database database_name; drop database if exists database_name;
 
 4) to rename table_name: rename table old_name to new_name;
 
